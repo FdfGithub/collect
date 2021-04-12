@@ -1,0 +1,46 @@
+body {
+    height: calc(100vh);
+}
+.content {
+    height: 90%;
+    width: 80%;
+    position: relative;
+    background-color: #efefef;
+    float: right;
+}
+
+.content > table {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    height: 70%;
+    width: 70%;
+    text-align: center;
+}
+
+.content > table td {
+    padding: 20px;
+    box-sizing: border-box;
+    border-bottom: black solid 1px;
+}
+
+.input_item {
+    margin-top: 10px;
+}
+
+#dt-list > input {
+    margin-left: 10px;
+}
+
+#publish_btn {
+    height: 50px;
+    width: 200px;
+    font-size: 20px;
+}
+
+.x_class:hover {
+    color: red;
+}

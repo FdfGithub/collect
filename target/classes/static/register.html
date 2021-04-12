@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/login_register.css">
+</head>
+<body>
+<table>
+    <tr>
+        <td colspan="2"><a href="login.html">已有账号?点击登录</a></td>
+    </tr>
+    <tr>
+        <td>你的大名:</td>
+        <td><input class="input-class" id="userName"></td>
+    </tr>
+    <tr>
+        <td>密码：</td>
+        <td><input class="input-class" type="password" id="userPwd"></td>
+    </tr>
+    <tr>
+        <td>邮箱：</td>
+        <td><input class="input-class" id="email"></td>
+    </tr>
+    <tr>
+        <td>验证码:</td>
+        <td>
+            <input id="code">
+            <button id="get_code">获取验证码</button>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <button id="register_btn">注 册</button>
+        </td>
+    </tr>
+</table>
+<script type="application/javascript" src="js/jquery/jquery-3.3.1.js"></script>
+<script>
+    $(function () {
+        $("#get_code").click(function () {
+            const email = $("#email").val();
+            $.ajax({
+                url: "/user/getCode",
+                type: "get",
+                data: {
+                    email: email
+                },
+                dataType: "json",
+                success(data) {
+                    alert(data["msg"]);
+                }
+            })
+        });
+
+        $("#register_btn").click(function () {
+            const user_name = $("#userName").val();
+            const user_pwd = $("#userPwd").val();
+            const email = $("#email").val();
+            const code = $("#code").val();
+            $.ajax({
+                url: "/user/register",
+                type: "post",
+                data: {
+                    userName: user_name,
+                    userPwd: user_pwd,
+                    email: email,
+                    code: code
+                },
+                dataType: "json",
+                success(data){
+                    if (data["code"] === 200){
+                        location.href = "login.html";
+                        return;
+                    }
+                    alert(data['msg']);
+                }
+            })
+        });
+    });
+</script>
+</body>
+</html>

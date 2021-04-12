@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianjing.collect.dao.UserMapper">
+    <resultMap id="userResultMap" type="com.qianjing.collect.domain.User">
+        <id property="userId" column="user_id"/>
+        <collection property="tasks" column="user_id" ofType="com.qianjing.collect.domain.Task"
+                    select="com.qianjing.collect.dao.TaskMapper.selectTasksByUserId"/>
+    </resultMap>
+<!--    User selectUserById(Integer userId);-->
+    <select id="selectUserById" resultMap="userResultMap">
+        select * from tb_user where user_id = #{userId}
+    </select>
+
+<!--    User selectUserByEmail(String email);-->
+    <select id="selectUserByEmail" resultMap="userResultMap">
+        select * from tb_user where email = #{email}
+    </select>
+<!--    int selectCount(String email,String userPwd);-->
+    <select id="selectCount" resultType="int">
+        select count(*) from tb_user where email = #{email} and user_pwd = #{userPwd}
+    </select>
+
+<!--    int insertUser(User user);-->
+<!--    user_id  user_name  user_pwd  email   create_time-->
+    <insert id="insertUser">
+        insert into tb_user(user_name,user_pwd,email) values(#{userName},#{userPwd},#{email})
+    </insert>
+</mapper>

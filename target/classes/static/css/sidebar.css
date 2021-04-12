@@ -1,0 +1,29 @@
+body {
+    height: calc(100vh);
+}
+.sidebar {
+    height: 90%;
+    width: 20%;
+    float: left;
+    background-color: skyblue;
+}
+.sidebar>ul{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+}
+.sidebar li:hover{
+    background-color: rgba(113, 39, 148, 0.2);
+}
+.sidebar li{
+    height: 40px;
+    width: 100%;
+    line-height: 40px;
+}
+.sidebar li>a{
+    color: #FFFFFF;
+    font-size: 20px;
+}

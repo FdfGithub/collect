@@ -1,0 +1,29 @@
+server:
+  port: 80
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://39.108.186.224:3306/collect_db?characterEncoding=UTF-8
+    username: root
+    password: Fdf@4515
+  mail:
+    host: smtp.qq.com
+    username: 2856296647@qq.com
+    password: mjvtvhfrfdqcdehj
+  thymeleaf:
+    prefix: classpath:/templates/
+    check-template-location: true
+    cache: false
+    suffix: .html
+    encoding: UTF-8
+    mode: HTML5
+
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*Mapper.xml
+
+collect:
+  work:
+    root-path: ~/collect/work/
+    url-path: /work/
+

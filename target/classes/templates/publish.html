@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/top_bar.css">
+    <link rel="stylesheet" href="/css/publish.css">
+</head>
+<body>
+
+<div class="top_bar"></div>
+<div class="sidebar">
+    <ul>
+        <li><a href="/task/publish/page">发布收集任务</a></li>
+        <li><a href="/task/collects/page">查看收集情况</a></li>
+    </ul>
+</div>
+
+<div class="content" id="publish_form">
+    <table>
+        <tr>
+            <td>标题：</td>
+            <td><input id="taskName" style="width: 400px"></td>
+        </tr>
+        <tr>
+            <td>描述：</td>
+            <td><textarea id="taskDesc" rows="3" cols="50" style="resize: none;"></textarea>
+        </tr>
+        <tr>
+            <td>截止日期：</td>
+            <td><input type="datetime-local" id="taskDeadline"></td>
+        </tr>
+        <tr>
+            <td>文档类型：</td>
+            <td id="dt-list">
+                <input type="checkbox" name="docTypes" value="pdf">pdf
+                <input type="checkbox" name="docTypes" value="doc,docs,docx">doc/docs/docx
+                <input type="checkbox" name="docTypes" value="zip,rar">zip/rar
+                <input type="checkbox" name="docTypes" value="xls,xlsx">xls/xlsx
+                <input type="checkbox" name="docTypes" value="ppt,pptx">ppt/pptx
+            </td>
+        </tr>
+        <tr>
+            <td>统一命名规则：</td>
+            <td>
+                <button id="add_input">继续添加</button>
+                <div id="input_list">
+                    <div class="input_item">
+                        <input name="formInputs">
+                        <a class="x_class" href="#">X</a>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="border: none">
+                <button id="publish_btn">发 布</button>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+<script type="application/javascript" src="/js/jquery/jquery-3.3.1.js"></script>
+<script type="application/javascript" src="/js/publish.js"></script>
+<script>
+    function x(){
+        $(".x_class").click(function () {
+            $(this).parent().remove();
+        });
+    }
+
+    $(function () {
+        $("#add_input").click(function () {
+            let $form_inputs = $("input[name='formInputs']");
+            if ($form_inputs.length >= 4) {
+                alert("最多只能添加4个选项");
+                return;
+            }
+            $("#input_list").append(`<div class="input_item">
+                        <input name="formInputs">
+                        <a class="x_class" href="#">X</a>
+                    </div>`);
+            //因为重新创建的<a class="x_class" href="#">X</a>没有绑定点击监听事件
+            x();
+        });
+        x();
+    });
+</script>
+</html>

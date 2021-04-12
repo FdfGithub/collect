@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianjing.collect.dao.TaskMapper">
+    <resultMap id="taskResultMap" type="com.qianjing.collect.domain.Task">
+        <id property="taskId" column="task_id"/>
+        <association property="user" column="user_id" select="com.qianjing.collect.dao.UserMapper.selectUserById"/>
+        <collection property="collects" column="task_id" ofType="com.qianjing.collect.domain.Collect"
+                    select="com.qianjing.collect.dao.CollectMapper.selectCollectsByTaskId"/>
+    </resultMap>
+<!--    Task selectTaskByTaskId(Integer taskId);-->
+    <select id="selectTaskByTaskId" resultMap="taskResultMap">
+        select * from tb_task where task_id = #{task_id} and status != -1;
+    </select>
+<!--    List<Task> selectTasksByUserId(Integer userId);-->
+    <select id="selectTasksByUserId" resultMap="taskResultMap">
+        select * from tb_task where user_id = #{userId} and status != -1;
+    </select>
+<!--    int insertTask(Task task);-->
+    <insert id="insertTask" useGeneratedKeys="true" keyProperty="taskId">
+        insert into tb_task(task_name,task_desc,task_deadline,user_id,doc_types,form_inputs)
+        values(#{taskName},#{taskDesc},#{taskDeadline},#{user.userId},#{docTypes},#{formInputs})
+    </insert>
+<!--    int updateStatus();-->
+    <update id="updateStatus">
+        update tb_task set status = 1 where task_id = #{taskId} and status = 0
+    </update>
+</mapper>

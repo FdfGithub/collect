@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 th:text="${task.getTaskName()}"></h1>
+<p th:text="${task.getTaskDesc()}"></p>
+截止时间：<span th:text="${task.getTaskDeadline()}"></span><br/>
+创建者: <span th:text="${task.getCreator().getUserName()}"></span><br/>
+当前状态： <span th:text="${task.getStatusName()}"></span><br/>
+文档类型要求：<span th:text="${task.getDocTypes()}"></span>
+<form action="/file/upload" method="post" enctype="multipart/form-data" th:if="${task.getStatus()} == 0">
+    <input type="hidden" th:value="${task.getTaskId()}" name="taskId">
+    <div th:each="form_input:${task.getFormInputs()}">
+        <span th:text="${form_input}"></span><input name="submitNames"><br/>
+    </div>
+    <input type="file" name="file"><input type="submit" value="点击上传">
+</form>
+</body>
+</html>

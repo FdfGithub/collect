@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/top_bar.css">
+</head>
+<body>
+<div class="top_bar"></div>
+<div class="sidebar">
+    <ul>
+        <li><a href="/task/publish/page">发布收集任务</a></li>
+        <li><a href="/task/collects/page">查看收集情况</a></li>
+    </ul>
+</div>
+<div th:each="task: ${tasks}">
+    收集名称：<span th:text="${task.getTaskName()}"></span> -> 收集地址：<span th:text="${task.getCommitUrl()}"></span><br/>
+</div>
+<span style="color: red">复制收集地址给其他人，就可以完成收集任务</span>
+</body>
+<script type="application/javascript" src="/js/jquery/jquery-3.3.1.js"></script>
+</html>
