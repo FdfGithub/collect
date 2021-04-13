@@ -31,14 +31,14 @@ public class UserController {
     private UserService userService;
 
     @Autowired
-    private TaskService taskService;
+    private ObjectUtil objectUtil;
 
     @PostMapping("/register")
     @ResponseBody
     public Response<Void> register(UserForm form, String code) {
         RegisterDto dto = new RegisterDto();
         dto.setCode(code);
-        dto.setUser(ObjectUtil.assembleObject(form, User.class));
+        dto.setUser(objectUtil.assembleObject(form, User.class));
         dto.setLocalCode(SessionUtil.get("localCode", String.class));
         return userService.register(dto);
     }

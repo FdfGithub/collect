@@ -20,19 +20,24 @@ public class PageController {
     @Autowired
     private TaskService taskService;
 
+    @Autowired
+    private ObjectUtil objectUtil;
+
     @GetMapping("/task/commit/{taskId}")
     public String returnTaskCommitPage(@PathVariable Integer taskId, Model model) {
         //查出task的信息
         Task task = taskService.queryTask(taskId).getData();
-        TaskVo taskVo = ObjectUtil.assembleTaskVo(task);
+        TaskVo taskVo = objectUtil.assembleTaskVo(task);
         model.addAttribute("task", taskVo);
         return "commit";
     }
+
 
     @GetMapping("/task/publish/page")
     public String returnTaskPublishPage() {
         return "publish";
     }
+
 
     @GetMapping("/task/collects/page")
     public String returnTaskCollectsPage(Model model) {

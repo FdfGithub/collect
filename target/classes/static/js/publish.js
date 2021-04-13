@@ -1,5 +1,6 @@
 $(function () {
     $("#publish_btn").click(function () {
+        $(this).attr("disabled", "disabled");
         const task_name = $("#taskName").val();
         const task_desc = $("#taskDesc").val();
         const task_deadline = $("#taskDeadline").val();

@@ -5,16 +5,15 @@
 <mapper namespace="com.qianjing.collect.dao.CollectMapper">
     <resultMap id="collectResultMap" type="com.qianjing.collect.domain.Collect">
         <id property="collectId" column="collect_id"/>
-        <association property="user" column="user_id" select="com.qianjing.collect.dao.UserMapper.selectUserById"/>
     </resultMap>
     
 <!--    List<Collect> selectCollectsByTaskId(Integer taskId);-->
     <select id="selectCollectsByTaskId" resultType="com.qianjing.collect.domain.Collect">
-        select * from tb_collect where task_id = #{taskId} and status != -1
+        select * from tb_collect where task_id = #{taskId} and status != -1 order by stu_no
     </select>
 
 <!--    int insertCollect(Collect collect);-->
     <insert id="insertCollect">
-        insert into tb_collect(task_id,doc_url) values(#{task.taskId},#{docUrl})
+        insert into tb_collect(task_id,doc_url,stu_no) values(#{task.taskId},#{docUrl},#{stuNo})
     </insert>
 </mapper>

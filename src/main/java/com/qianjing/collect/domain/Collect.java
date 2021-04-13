@@ -10,6 +10,16 @@ public class Collect {
     private LocalDateTime createTime;
     private int status;
 
+    private String stuNo;
+
+    public String getStuNo() {
+        return stuNo;
+    }
+
+    public void setStuNo(String stuNo) {
+        this.stuNo = stuNo;
+    }
+
     public Integer getCollectId() {
         return collectId;
     }

@@ -3,8 +3,6 @@ package com.qianjing.collect.form;
 import com.qianjing.collect.annotation.Check;
 import com.qianjing.collect.annotation.NotNull;
 
-import java.util.List;
-
 @Check
 public class UploadForm {
     @NotNull

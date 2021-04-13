@@ -30,6 +30,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private EmailUtil emailUtil;
 
+    @Autowired
+    private ObjectUtil objectUtil;
+
     @Override
     public Response<UserVo> login(String email, String userPwd) {
         int count = userMapper.selectCount(email, MD5Util.MD5EncodeUtf8(userPwd));
@@ -41,7 +44,7 @@ public class UserServiceImpl implements UserService {
             }
             user.setUserPwd("");
             SessionUtil.set("userId", user.getUserId(), -1);
-            return Response.returnSuccess(ObjectUtil.assembleObject(user,UserVo.class), "登录成功");
+            return Response.returnSuccess(objectUtil.assembleObject(user,UserVo.class), "登录成功");
         }
         throw new OutException("用户名或密码错误");
     }

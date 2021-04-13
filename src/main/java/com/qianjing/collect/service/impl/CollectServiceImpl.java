@@ -50,12 +50,12 @@ public class CollectServiceImpl implements CollectService {
         throw new OutException("撤销失败");
     }
 
-    @Override
-    public Response<Collect> queryCollect(Integer userId, Integer taskId) {
-        Collect collect = collectMapper.selectCollectByUserIdAndTaskId(userId, taskId);
-        if (ObjectUtils.isEmpty(collect)){
-            throw new OutException("你还没有提交该收集任务相关文档");
-        }
-        return Response.returnSuccess(collect,"查询成功");
-    }
+//    @Override
+//    public Response<Collect> queryCollect(Integer userId, Integer taskId) {
+//        Collect collect = collectMapper.selectCollectByUserIdAndTaskId(userId, taskId);
+//        if (ObjectUtils.isEmpty(collect)){
+//            throw new OutException("你还没有提交该收集任务相关文档");
+//        }
+//        return Response.returnSuccess(collect,"查询成功");
+//    }
 }

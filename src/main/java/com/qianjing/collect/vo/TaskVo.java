@@ -13,7 +13,7 @@ public class TaskVo {
     private String docTypes;
     private String[] formInputs;
     private UserVo creator;//收集任务的创建者
-    private List<Collect> collects;
+    private List<CollectVo> collects;
     private String statusName;
     private int status;
     private String commitUrl;
@@ -99,11 +99,11 @@ public class TaskVo {
         this.creator = creator;
     }
 
-    public List<Collect> getCollects() {
+    public List<CollectVo> getCollects() {
         return collects;
     }
 
-    public void setCollects(List<Collect> collects) {
+    public void setCollects(List<CollectVo> collects) {
         this.collects = collects;
     }
 

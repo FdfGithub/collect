@@ -11,11 +11,11 @@
     </resultMap>
 <!--    Task selectTaskByTaskId(Integer taskId);-->
     <select id="selectTaskByTaskId" resultMap="taskResultMap">
-        select * from tb_task where task_id = #{task_id} and status != -1;
+        select * from tb_task where task_id = #{task_id} and status != -1
     </select>
 <!--    List<Task> selectTasksByUserId(Integer userId);-->
     <select id="selectTasksByUserId" resultMap="taskResultMap">
-        select * from tb_task where user_id = #{userId} and status != -1;
+        select * from tb_task where user_id = #{userId} and status != -1 order by task_deadline
     </select>
 <!--    int insertTask(Task task);-->
     <insert id="insertTask" useGeneratedKeys="true" keyProperty="taskId">

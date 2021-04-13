@@ -20,12 +20,14 @@ public class TaskServiceImpl implements TaskService {
     @Autowired
     private TaskMapper taskMapper;
 
+    @Autowired
+    private ObjectUtil objectUtil;
 
     @Override
     public Response<TaskVo> publish(Task task) {
         int count = taskMapper.insertTask(task);
         if (count > 0) {
-            return Response.returnSuccess(ObjectUtil.assembleTaskVo(task), "发布成功");
+            return Response.returnSuccess(objectUtil.assembleTaskVo(task), "发布成功");
         }
         throw new OutException("发布失败");
     }
@@ -36,7 +38,7 @@ public class TaskServiceImpl implements TaskService {
         if (ObjectUtils.isEmpty(tasks)) {
             return Response.returnSuccess(null, "你还没有发布任何收集任务");
         }
-        return Response.returnSuccess(ObjectUtil.assembleTaskVos(tasks), "查询收集任务成功");
+        return Response.returnSuccess(objectUtil.assembleTaskVos(tasks), "查询收集任务成功");
     }
 
     @Override

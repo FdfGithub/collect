@@ -20,9 +20,12 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
+    @Autowired
+    private ObjectUtil objectUtil;
+
     @PostMapping("/publish")
     public Response<TaskVo> publish(TaskForm form) {
-        Task task = ObjectUtil.assembleObject(form, Task.class);
+        Task task = objectUtil.assembleObject(form, Task.class);
         User user = new User();
         user.setUserId(SessionUtil.get("userId", Integer.class));
         task.setUser(user);

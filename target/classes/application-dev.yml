@@ -22,5 +22,5 @@ mybatis:
 
 collect:
   work:
-    root-path: E:\project-doc\自动收集作业\work\
+    root-path: E:/project-doc/自动收集作业/work/
     url-path: /work/

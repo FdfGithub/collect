@@ -12,5 +12,5 @@ public interface CollectService {
 
     Response<Void> removeCollect(Integer collectId);
 
-    Response<Collect> queryCollect(Integer userId,Integer taskId);
+//    Response<Collect> queryCollect(Integer userId,Integer taskId);
 }

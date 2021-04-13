@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="css/login_register.css">
+    <link rel="stylesheet" href="/css/login_register.css">
 </head>
 <body>
 <table>
@@ -39,6 +39,8 @@
 <script>
     $(function () {
         $("#get_code").click(function () {
+            $(this).attr("disabled", "disabled");
+            $(this).text("验证码已发送");
             const email = $("#email").val();
             $.ajax({
                 url: "/user/getCode",
@@ -47,7 +49,7 @@
                     email: email
                 },
                 dataType: "json",
-                success(data) {
+                success: function (data) {
                     alert(data["msg"]);
                 }
             })

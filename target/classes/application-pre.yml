@@ -3,13 +3,18 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://39.108.186.224:3306/collect_db?characterEncoding=UTF-8
+    url: jdbc:mysql://xxx:3306/collect_db?characterEncoding=UTF-8&useSSL=false
     username: root
-    password: Fdf@4515
+    password: xxx
   mail:
     host: smtp.qq.com
     username: 2856296647@qq.com
     password: mjvtvhfrfdqcdehj
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
   thymeleaf:
     prefix: classpath:/templates/
     check-template-location: true
@@ -24,6 +29,6 @@ mybatis:
 
 collect:
   work:
-    root-path: ~/collect/work/
+    root-path: /root/collect/work/
     url-path: /work/
 

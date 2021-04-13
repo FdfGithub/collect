@@ -1,8 +1,10 @@
 package com.qianjing.collect.service.impl;
 
 import com.qianjing.collect.comm.Response;
+import com.qianjing.collect.dao.CollectMapper;
 import com.qianjing.collect.dao.TaskMapper;
 import com.qianjing.collect.dao.UserMapper;
+import com.qianjing.collect.domain.Collect;
 import com.qianjing.collect.domain.Task;
 import com.qianjing.collect.exception.FileException;
 import com.qianjing.collect.exception.InException;
@@ -66,13 +68,17 @@ public class FileServiceImpl implements FileService {
     }
 
     @Autowired
+    private CollectMapper collectMapper;
+
+    @Autowired
     private UserMapper userMapper;
 
     //撤销操作必须注册登录  filename格式：1801130067-傅德帆-离散数学5.doc
     @Override
-    public Response<Void> repeal(Integer taskId,String filename) {
+    public Response<Void> repeal(Integer taskId, Integer collectId) {
         //1. 确定文件在不在
-        File file = new File(rootPath + taskId, filename);
+        Collect collect = collectMapper.selectCollectById(collectId);
+        File file = new File(rootPath, collect.getDocUrl());
         if (file.exists() && file.delete()) {
             //2. 在的话删除，不在报错
             return Response.returnSuccess(null, "撤销成功");

@@ -9,8 +9,5 @@ public interface FileService {
     Response<String> upload(MultipartFile file, UploadForm form);
 
     //文件撤销
-    Response<Void> repeal(Integer taskId, String filename);
-
-    //文件下载, 能够下载到用户电脑的指定位置
-
+    Response<Void> repeal(Integer taskId, Integer collectId);
 }

@@ -20,4 +20,10 @@ public class FileController {
     public Response<String> upload(MultipartFile file, UploadForm form) {
         return fileService.upload(file, form);
     }
+
+
+    @DeleteMapping("/repeal")
+    public Response<Void> repeal(Integer taskId, Integer collectId){
+        return fileService.repeal(taskId, collectId);
+    }
 }

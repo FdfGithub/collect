@@ -14,6 +14,6 @@ public interface CollectMapper {
     @Delete("delete from tb_collect where collect_id = #{collectId}")
     int deleteCollectByCollectId(Integer collectId);
 
-    @Select("select * from tb_collect where user_id = #{userId} and task_id = #{taskId}")
-    Collect selectCollectByUserIdAndTaskId(Integer userId,Integer taskId);
+    @Select("select * from tb_collect where collect_id = #{collectId}")
+    Collect selectCollectById(Integer collectId);
 }

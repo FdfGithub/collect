@@ -11,7 +11,7 @@
 创建者: <span th:text="${task.getCreator().getUserName()}"></span><br/>
 当前状态： <span th:text="${task.getStatusName()}"></span><br/>
 文档类型要求：<span th:text="${task.getDocTypes()}"></span>
-<form action="/file/upload" method="post" enctype="multipart/form-data" th:if="${task.getStatus()} == 0">
+<form action="/file/upload" method="post" enctype="multipart/form-data" th:if="${task.getStatus() == 0}">
     <input type="hidden" th:value="${task.getTaskId()}" name="taskId">
     <div th:each="form_input:${task.getFormInputs()}">
         <span th:text="${form_input}"></span><input name="submitNames"><br/>
