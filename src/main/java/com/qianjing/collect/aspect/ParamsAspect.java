@@ -37,7 +37,7 @@ public class ParamsAspect {
     }
 
     private void checkNull(Object arg, String signature) {
-        if (ObjectUtils.isEmpty(arg)){
+        if (ObjectUtils.isEmpty(arg) || ",".equals(arg)){
             throw new InException("参数为空：" + signature);
         }
         //判断arg是否需要深度检查

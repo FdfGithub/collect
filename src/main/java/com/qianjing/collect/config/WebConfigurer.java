@@ -25,8 +25,8 @@ public class WebConfigurer implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(sessionIntercept);
-        registry.addInterceptor(loginIntercept).addPathPatterns("/task/publish","/task/publish/page","/task/repeal","/task/collects/page");
-        registry.addInterceptor(powerIntercept).addPathPatterns("/task/publish/page","/task/publish","/task/repeal","/task/collects/page");
+        registry.addInterceptor(loginIntercept).addPathPatterns("/task/publish","/task/publish/page","/task/repeal","/task/collects/page",virtualPath+"**");
+        registry.addInterceptor(powerIntercept).addPathPatterns(virtualPath+"**");
     }
 
     @Value("${collect.work.root-path}")

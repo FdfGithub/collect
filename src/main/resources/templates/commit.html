@@ -14,9 +14,10 @@
 <form action="/file/upload" method="post" enctype="multipart/form-data" th:if="${task.getStatus() == 0}">
     <input type="hidden" th:value="${task.getTaskId()}" name="taskId">
     <div th:each="form_input:${task.getFormInputs()}">
-        <span th:text="${form_input}"></span><input name="submitNames"><br/>
+        <span th:text="${form_input}"></span><input required name="submitNames"><br/>
     </div>
-    <input type="file" name="file"><input type="submit" value="点击上传">
+    <input type="file" required name="file">
+    <input type="submit" value="点击上传">
 </form>
 </body>
 </html>

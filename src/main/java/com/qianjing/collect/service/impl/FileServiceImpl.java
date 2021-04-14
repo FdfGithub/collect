@@ -17,10 +17,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.*;
 
 @Service
 public class FileServiceImpl implements FileService {
@@ -34,13 +36,14 @@ public class FileServiceImpl implements FileService {
     private String rootPath;
 
     @Override
+    @Transactional
     public Response<String> upload(MultipartFile file, UploadForm form) {
         Task task = taskMapper.selectTaskByTaskId(form.getTaskId());
         if (task == null) {
             throw new OutException("当前收集任务已经被删除");
         }
-        //1. 检查文件类型是否符合task的docTypes
         try {
+            //1. 检查文件类型是否符合task的docTypes
             String suffix = FileUtil.getSuffix(file.getOriginalFilename());
             if (isPass(suffix, task.getDocTypes())) {
                 //符合要求，可以上传文件
@@ -48,20 +51,27 @@ public class FileServiceImpl implements FileService {
                 String filename = form.getSubmitNames().replace(",", "-") + "-" + task.getTaskName() +
                         "." + suffix;
                 File parent = new File(rootPath + task.getTaskId());
-                if (!parent.exists() && !parent.mkdirs()) {
-                    throw new InException("文件创建失败：" + parent.getAbsolutePath());
-                }
                 File save = new File(parent, filename);
                 if (save.exists()) {
                     throw new OutException("你已经提交过了(如果想重新提交，请先撤销之前提交的记录)");
                 }
-                file.transferTo(save);
+                //直接返回上传成功，然后再开一个线程自己去完成上传操作
+                Executors.newCachedThreadPool().execute(() -> {
+                    if (!parent.exists() && !parent.mkdirs()) {
+                        throw new InException("文件创建失败：" + parent.getAbsolutePath());
+                    }
+                    try {
+                        file.transferTo(save);
+                        logger.info(filename + "文件成功上传到：{}", parent.getAbsolutePath());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
                 String url = task.getTaskId() + "/" + filename;
-                logger.info(filename + "文件成功上传到：{}", parent.getAbsolutePath());
                 return Response.returnSuccess(url, "上传成功");
             }
             throw new OutException("文件类型不符合要求");
-        } catch (FileException | IOException e) {
+        } catch (FileException e) {
             e.printStackTrace();
             throw new OutException("上传失败");
         }

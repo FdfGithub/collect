@@ -44,12 +44,9 @@ public class UserController {
     }
 
     @PostMapping("/admin/login")
-    public String loginAdmin(String email, String userPwd, HttpServletResponse response) throws ServletException, IOException {
-        UserVo user = userService.login(email, userPwd).getData();
-        if(user.getUserRole() == Const.UserRole.ADMIN){
-            response.sendRedirect("/task/collects/page");
-        }
-        throw new OutException("不是管理员身份");
+    public void loginAdmin(String email, String userPwd, HttpServletResponse response) throws ServletException, IOException {
+        userService.login(email, userPwd);
+        response.sendRedirect("/task/collects/page");
     }
 
     @ResponseBody

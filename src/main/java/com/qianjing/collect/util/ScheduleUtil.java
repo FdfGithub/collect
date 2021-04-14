@@ -6,12 +6,13 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ScheduledFuture;
 
 public class ScheduleUtil {
 
     private final static ThreadPoolTaskScheduler threadPoolTaskScheduler = new ThreadPoolTaskScheduler();
-    private final static Map<String, ScheduledFuture<?>> scheduledFutureMap = new HashMap<>();
+    private final static Map<String, ScheduledFuture<?>> scheduledFutureMap = new ConcurrentHashMap<>();
 
     static {
         threadPoolTaskScheduler.initialize();

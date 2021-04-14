@@ -1,11 +1,12 @@
 server:
   port: 80
+
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://xxx:3306/collect_db?characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://39.108.186.224:3306/collect_db?characterEncoding=UTF-8&useSSL=false
     username: root
-    password: xxx
+    password: Fdf@4515
   mail:
     host: smtp.qq.com
     username: 2856296647@qq.com
@@ -22,7 +23,10 @@ spring:
     suffix: .html
     encoding: UTF-8
     mode: HTML5
-
+  servlet:
+    multipart:
+      max-request-size: 10MB
+      max-file-size: 10MB
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
   mapper-locations: classpath:mybatis/mapper/*Mapper.xml

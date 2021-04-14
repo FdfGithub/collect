@@ -22,10 +22,10 @@
 </div>
 <div th:each="task: ${tasks}">
     <span th:text="${task.getTaskName()}"></span> -
+    截止时间: <span th:text="${task.getTaskDeadline()}"></span> -
+    已收集<span th:text="${task.collects.size()}"></span>份了 -
     <a th:href="${task.getCommitUrl()}" th:if="${task.getStatus() == 0}">收集地址</a>
     <a th:href="${task.getZipUrl()}" th:if="${task.getStatus() == 1}">点击下载?已经收集完毕</a>
-    已收集<span th:text="${task.collects.size()}"></span>份了 -
-    截止时间: <span th:text="${task.getTaskDeadline()}"></span>
     <div class="c_list" th:each="collect: ${task.getCollects()}" th:object="${task}">
         <a th:href="${collect.getDocUrl()}" th:text="${collect.getCollectName()}"></a>
         <a class="x_class" href="#" th:attr="task_id=${task.getTaskId()},collect_id=${collect.getCollectId()}">X</a>
